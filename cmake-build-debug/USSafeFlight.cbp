@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Volumes/YM/USSafeFlight/Graph.h">
+			<Option target="USSafeFlight"/>
+		</Unit>
 		<Unit filename="/Volumes/YM/USSafeFlight/main.cpp">
 			<Option target="USSafeFlight"/>
 		</Unit>
