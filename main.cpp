@@ -9,25 +9,30 @@ using namespace std;
 // Load data function and find the best paths functions here
 void LoadData(vector<Graph>& flights, string path)
 {
-    fstream file (path);
-    string line, day, start, end, distance, temp ;
+    fstream file;
+    file.open(path,ios::in | ios::out);
+    string line, day, start, end, distance, temp;
 
-    if(file.is_open())
-        cout<<"yes";
 
-    while (file >> temp)
+    while ( getline(file,line))
     {
-        getline(file,line);
-        stringstream s(line);
 
-        getline(s, day, ',');
-        cout<<day<<endl;
-        getline(s,start,',');
-        cout<<start<<endl;
-        getline(s, end,',');
-        cout<<end<<endl;
-        getline(s,distance,',');
-        cout<<distance<<endl;
+        stringstream s(line);
+        getline(s,day,',');
+        getline(s, temp, ',');
+        start = start+temp.substr(1,temp.length());
+        getline(s, temp, ',');
+        start = start+temp.substr(0,temp.length()-1);
+       // cout<<start<<endl;
+
+        getline(s, temp, ',');
+        end = end+temp.substr(1,temp.length());
+        getline(s, temp, ',');
+        end = end+temp.substr(0,temp.length()-1);
+       // cout<<end<<endl;
+
+        getline(s,distance);
+        //cout<<distance<<endl;
 
         for (int i =0; i<30; i++)
         {    string d = to_string(i+1);
@@ -38,6 +43,10 @@ void LoadData(vector<Graph>& flights, string path)
 
         }
 
+        start ="";
+        end ="";
+
+       // break;
     }
 
 
@@ -57,7 +66,10 @@ int main() {
         Your recommended flight(s) are shown below
      */
     vector<Graph> flights (31, Graph());
+    cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
+    cout<<"Loading Data ..."<<endl;
     LoadData(flights,"Data.csv");
+
 
     string command = "Yes";
     string day ="";
@@ -65,11 +77,8 @@ int main() {
     string des = "";
     while(command=="Yes")
     {
-        cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
-        /*
-         * Take in commands and make sure they are valid; If they are valid, we can change the string to
-         * match the data in csv, e.g. 'Los Angeles, CA'
-         */
+        
+
         cout<<"Would you like to continue (Yes/No)?"<<endl;
         cin>>command;
         while (command != "Yes" && command != "No")
