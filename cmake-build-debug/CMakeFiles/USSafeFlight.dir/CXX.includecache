@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Volumes/YM/USSafeFlight/Graph.h
+string
+-
+map
+-
+vector
+-
+
+/Volumes/YM/USSafeFlight/main.cpp
+iostream
+-
+Graph.h
+/Volumes/YM/USSafeFlight/Graph.h
+
