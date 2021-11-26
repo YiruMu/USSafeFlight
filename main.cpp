@@ -2,10 +2,43 @@
 #include "Graph.h"
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 // Load data function and find the best paths functions here
-void LoadData(vector<Graph>& flights, string path);
+void LoadData(vector<Graph>& flights, string path)
+{
+    fstream file;
+    file.open(path, ios::in);
+    string line, day, start, end, distance;
+
+    while (getline(file,line))
+    {
+
+        stringstream s(line);
+        getline(s, day, ',');
+        cout<<day<<endl;
+        getline(s,start,',');
+        cout<<start<<endl;
+        getline(s, end,',');
+        cout<<end<<endl;
+        getline(s,distance,',');
+        cout<<distance<<endl;
+
+        for (int i =0; i<30; i++)
+        {    string d = to_string(i+1);
+            if (day == "1/"+d+"/2021")
+            {
+                flights[i].insertEdge(start,end,stoi(distance));
+            }
+
+        }
+
+    }
+
+
+}
 vector<string> dijkstra(const Graph& graph, string start);
 vector<string> bellmanFord(const Graph& graph, string start);
 
@@ -21,7 +54,7 @@ int main() {
         Your recommended flight(s) are shown below
      */
     vector<Graph> flights (31, Graph());
-    // we can call pass the reference of flights into the load function above and load the data
+    LoadData(flights,"Data.csv");
 
     string command = "Yes";
     string day ="";

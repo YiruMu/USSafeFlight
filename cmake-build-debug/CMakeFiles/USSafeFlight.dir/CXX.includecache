@@ -19,4 +19,12 @@ iostream
 -
 Graph.h
 /Volumes/YM/USSafeFlight/Graph.h
+vector
+-
+string
+-
+fstream
+-
+sstream
+-
 
