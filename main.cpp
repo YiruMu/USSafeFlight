@@ -9,14 +9,17 @@ using namespace std;
 // Load data function and find the best paths functions here
 void LoadData(vector<Graph>& flights, string path)
 {
-    fstream file;
-    file.open(path, ios::in);
-    string line, day, start, end, distance;
+    fstream file (path);
+    string line, day, start, end, distance, temp ;
 
-    while (getline(file,line))
+    if(file.is_open())
+        cout<<"yes";
+
+    while (file >> temp)
     {
-
+        getline(file,line);
         stringstream s(line);
+
         getline(s, day, ',');
         cout<<day<<endl;
         getline(s,start,',');
