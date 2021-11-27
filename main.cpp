@@ -56,6 +56,7 @@ vector<string> bellmanFord(const Graph& graph, string start);
 int main() {
     cout << "Mason is testing GitHub - delete this" << endl;
     cout<<"Yiru is testing"<<endl;
+    cout<<"samy is testing !!"<<endl;
     // create a vector that contains 31 graphs/travel information of 31 days of the month
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
