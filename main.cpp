@@ -21,16 +21,16 @@ void LoadData(vector<Graph>& flights, string path)
         start = start+temp.substr(1,temp.length());
         getline(s, temp, ',');
         start = start+temp.substr(0,temp.length()-1);
-        //cout<<start<<endl;
+        cout<<start<<endl;
 
         getline(s, temp, ',');
         end = end+temp.substr(1,temp.length());
         getline(s, temp, ',');
         end = end+temp.substr(0,temp.length()-1);
-        //cout<<end<<endl;
+        cout<<end<<endl;
 
         getline(s,distance);
-        //cout<<distance<<endl;
+        cout<<distance<<endl;
 
         for (int i =0; i<30; i++)
         {    string d = to_string(i+1);
@@ -42,14 +42,13 @@ void LoadData(vector<Graph>& flights, string path)
         }
         start ="";
         end ="";
-        //break;
+        cout<<"hello";
     }
 
 }
 
 vector<string> dijkstra(Graph& graph, string start)
 {
-
 
 }
 vector<string> bellmanFord(const Graph& graph, string start);
