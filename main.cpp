@@ -42,7 +42,7 @@ void LoadData(vector<Graph>& flights, string path)
         }
         start ="";
         end ="";
-        cout<<"hello";
+
     }
 
 }
