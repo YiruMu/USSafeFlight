@@ -21,16 +21,16 @@ void LoadData(vector<Graph>& flights, string path)
         start = start+temp.substr(1,temp.length());
         getline(s, temp, ',');
         start = start+temp.substr(0,temp.length()-1);
-        cout<<start<<endl;
+        //cout<<start<<endl;
 
         getline(s, temp, ',');
         end = end+temp.substr(1,temp.length());
         getline(s, temp, ',');
         end = end+temp.substr(0,temp.length()-1);
-        cout<<end<<endl;
+        //cout<<end<<endl;
 
         getline(s,distance);
-        cout<<distance<<endl;
+       // cout<<distance<<endl;
 
         for (int i =0; i<30; i++)
         {    string d = to_string(i+1);
@@ -55,6 +55,7 @@ vector<string> bellmanFord(const Graph& graph, string start);
 
 int main() {
     cout << "Mason is testing GitHub - delete this" << endl;
+    cout<<"Yiru is testing"<<endl;
     // create a vector that contains 31 graphs/travel information of 31 days of the month
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
