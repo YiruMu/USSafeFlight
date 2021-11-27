@@ -13,23 +13,21 @@ void LoadData(vector<Graph>& flights, string path)
     file.open(path,ios::in | ios::out);
     string line, day, start, end, distance, temp;
 
-
     while ( getline(file,line))
     {
-
         stringstream s(line);
         getline(s,day,',');
         getline(s, temp, ',');
         start = start+temp.substr(1,temp.length());
         getline(s, temp, ',');
         start = start+temp.substr(0,temp.length()-1);
-       // cout<<start<<endl;
+        //cout<<start<<endl;
 
         getline(s, temp, ',');
         end = end+temp.substr(1,temp.length());
         getline(s, temp, ',');
         end = end+temp.substr(0,temp.length()-1);
-       // cout<<end<<endl;
+        //cout<<end<<endl;
 
         getline(s,distance);
         //cout<<distance<<endl;
@@ -42,29 +40,22 @@ void LoadData(vector<Graph>& flights, string path)
             }
 
         }
-
         start ="";
         end ="";
-
-       // break;
+        //break;
     }
+
+}
+
+vector<string> dijkstra(Graph& graph, string start)
+{
 
 
 }
-vector<string> dijkstra(const Graph& graph, string start);
 vector<string> bellmanFord(const Graph& graph, string start);
 
 int main() {
-    /* create a vector of 31 graphs using load data function
-     contains a while loop, it will keep running until the user inputs -1
-     command prompt:
-        Welcome to US Safe Flight, enter 'No' to terminate the program
-        What day of the month do you intent to travel?
-        What is your starting location?
-        What is your destination?
-     output:
-        Your recommended flight(s) are shown below
-     */
+    // create a vector that contains 31 graphs/travel information of 31 days of the month
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
     cout<<"Loading Data ..."<<endl;
@@ -75,10 +66,24 @@ int main() {
     string day ="";
     string start = "";
     string des = "";
+
     while(command=="Yes")
     {
-        
+        cout<<"What day of the month would you like to travel (pick a number from 1-31)?"<<endl;
+        getline(cin,day);
 
+        cout<<"What is your starting location? (e.g. Los Angeles CA)"<<endl;
+        getline(cin,start);
+        cout<<"What is your destination? (e.g. Los Angeles CA)"<<endl;
+        getline(cin, des);
+        /*
+         * need to double check if the inputs are valid
+         */
+
+        // if valid, call find the best flights functions
+
+
+        // Ask users if they want to continue with the program
         cout<<"Would you like to continue (Yes/No)?"<<endl;
         cin>>command;
         while (command != "Yes" && command != "No")
@@ -86,8 +91,6 @@ int main() {
             cout<<"Invalid input. Try again."<<endl;
             cin>>command;
         }
-
-
 
     }
 
