@@ -7,6 +7,7 @@
 using namespace std;
 
 // Load data function and find the best paths functions here
+// for each graph, vertices are city +state, e.g. Los Angeles CA and the weight is the distance
 void LoadData(vector<Graph>& flights, string path)
 {
     fstream file;
@@ -50,13 +51,13 @@ void LoadData(vector<Graph>& flights, string path)
 vector<string> dijkstra(Graph& graph, string start)
 {
 
+
+
 }
-vector<string> bellmanFord(const Graph& graph, string start);
+vector<string> bellmanFord(Graph& graph, string start);
 
 int main() {
-    cout << "Mason is testing GitHub - delete this" << endl;
-    cout<<"Yiru is testing"<<endl;
-    cout<<"samy is testing !!"<<endl;
+
     // create a vector that contains 31 graphs/travel information of 31 days of the month
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
