@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <map>
 using namespace std;
 
 // Load data function and find the best paths functions here
@@ -48,11 +49,52 @@ void LoadData(vector<Graph>& flights, string path)
 
 }
 
-vector<string> dijkstra(Graph& graph, string start)
+//the function returns a map<string,int> that contains the shortest path from the source vertex to all vertices in the directed graph.
+map<string,int> dijkstra(Graph& graph, string start)
 {
+    map<string,int> output;
+    map<string,bool> set;
+    auto itr = graph.graph.begin();
 
+    for (; itr!= graph.graph.end(); itr++ )
+    {
+        output[itr->first]= INT_MAX;
+        set[itr->first] = false;
 
+    }
 
+    output[start] =0;
+    for (int i=0; i<output.size()-1; i++)
+    {
+        int min = INT_MAX;
+        string min_index;
+        auto itr = output.begin();
+
+        for (; itr!=output.end(); itr++)
+        {
+            if(set[itr->first] == false && output[itr->first]<=min)
+                min = output[itr->first], min_index = itr->first;
+        }
+
+        set[min_index] = true;
+        itr = output.begin();
+        for (; itr != output.end(); itr++)
+        {
+            for (int j =0; j<graph.graph[min_index].size();j++)
+            {
+                if(graph.graph[min_index].at(j).first == itr->first && !set[itr->first]&& output[min_index] != INT_MAX)
+                {
+                    if (output[min_index] +graph.graph[min_index].at(j).second < output[itr->first])
+                    {
+
+                        output[itr->first] = output[min_index] +  graph.graph[min_index].at(j).second;
+                    }
+                }
+            }
+
+        }
+    }
+    return output;
 }
 vector<string> bellmanFord(Graph& graph, string start);
 
@@ -84,6 +126,15 @@ int main() {
          */
 
         // if valid, call find the best flights functions
+
+        // ....... Testing code for dijkstra, delete later ........
+        map<string,int> temp = dijkstra(flights[0], "Los Angeles CA");
+        auto itr = temp.begin();
+        for (; itr!= temp.end();itr++)
+        {
+            cout<<itr->first<<"  "<<itr->second<<endl;
+        }
+        // ..........Testing cod for dijkstra ........
 
 
         // Ask users if they want to continue with the program

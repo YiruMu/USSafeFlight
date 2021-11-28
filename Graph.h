@@ -4,10 +4,10 @@
 using namespace std;
 
 class Graph{
-private:
-    // Graph ADJACENCY LIST data structure here
-    map<string, vector<pair<string,int>>> graph;
+
+
 public:
+    map<string, vector<pair<string,int>>> graph;
     void insertEdge(string from, string to, int weight);
     bool isEdge(string from, string to);
     int getWeight(string from, string to);
