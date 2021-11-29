@@ -160,6 +160,7 @@ int main() {
                     valid = false;
                     break;
                 }
+
             }
         int date = 0;
         if(valid)
@@ -186,7 +187,7 @@ int main() {
         {
             cout << "Invalid input. Please enter a number from 1-31" << endl;
             getline(cin,day);
-            valid = true;
+
         }
         }
         
