@@ -65,7 +65,7 @@ void dijkstra(Graph& graph, string start, string end)
     {
         output[itr->first]= INT_MAX;
         set[itr->first] = false;
-        p[itr->first] = "none";
+        p[itr->first] = "None";
 
     }
 
@@ -115,8 +115,7 @@ void dijkstra(Graph& graph, string start, string end)
         results.pop();
     }
     cout<<"Arrived!"<<endl;
-
-
+    
 }
 vector<string> bellmanFord(Graph& graph, string start);
 
@@ -151,7 +150,7 @@ int main() {
 
         // ....... Testing code for dijkstra, delete later ........
          dijkstra(flights[0], "Los Angeles CA", "Detroit MI");
-        // ..........Testing cod for dijkstra ........
+        // ..........Testing code for dijkstra ........
 
 
         // Ask users if they want to continue with the program
