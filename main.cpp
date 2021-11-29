@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <stack>
 using namespace std;
 
 // Load data function and find the best paths functions here
@@ -50,16 +51,21 @@ void LoadData(vector<Graph>& flights, string path)
 }
 
 //the function returns a map<string,int> that contains the shortest path from the source vertex to all vertices in the directed graph.
-map<string,int> dijkstra(Graph& graph, string start)
+void dijkstra(Graph& graph, string start, string end)
 {
     map<string,int> output;
     map<string,bool> set;
+    map<string,string> p;
+    stack<string> results;
+    results.push(end);
+
     auto itr = graph.graph.begin();
 
     for (; itr!= graph.graph.end(); itr++ )
     {
         output[itr->first]= INT_MAX;
         set[itr->first] = false;
+        p[itr->first] = "none";
 
     }
 
@@ -72,8 +78,9 @@ map<string,int> dijkstra(Graph& graph, string start)
 
         for (; itr!=output.end(); itr++)
         {
-            if(set[itr->first] == false && output[itr->first]<=min)
+            if(set[itr->first] == false && output[itr->first]<=min) {
                 min = output[itr->first], min_index = itr->first;
+            }
         }
 
         set[min_index] = true;
@@ -88,13 +95,28 @@ map<string,int> dijkstra(Graph& graph, string start)
                     {
 
                         output[itr->first] = output[min_index] +  graph.graph[min_index].at(j).second;
+                        p[itr->first] = min_index;
                     }
+
                 }
             }
 
         }
     }
-    return output;
+
+    while(results.top()!= start)
+    {
+        results.push(p[results.top()]);
+    }
+
+    while (!results.empty())
+    {
+        cout<<results.top()<<" ->";
+        results.pop();
+    }
+    cout<<"Arrived!"<<endl;
+
+
 }
 vector<string> bellmanFord(Graph& graph, string start);
 
@@ -128,12 +150,7 @@ int main() {
         // if valid, call find the best flights functions
 
         // ....... Testing code for dijkstra, delete later ........
-        map<string,int> temp = dijkstra(flights[0], "Los Angeles CA");
-        auto itr = temp.begin();
-        for (; itr!= temp.end();itr++)
-        {
-            cout<<itr->first<<"  "<<itr->second<<endl;
-        }
+         dijkstra(flights[0], "Los Angeles CA", "Detroit MI");
         // ..........Testing cod for dijkstra ........
 
 
