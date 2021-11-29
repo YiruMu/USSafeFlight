@@ -156,8 +156,10 @@ int main() {
                     valid = true;
                     //break;
                 }
-                else
+                else{
                     valid = false;
+                    break;
+                }
             }
         int date = 0;
         if(valid)
