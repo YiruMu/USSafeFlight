@@ -149,7 +149,7 @@ int main() {
         // if valid, call find the best flights functions
 
         // ....... Testing code for dijkstra, delete later ........
-         dijkstra(flights[0], "Los Angeles", "Detroit MI");
+         dijkstra(flights[0], "Los Angeles CA", "Detroit MI");
         // ..........Testing code for dijkstra ........
 
 
