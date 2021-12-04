@@ -119,7 +119,52 @@ void dijkstra(Graph& graph, string start, string end)
     
 }
 //vector<string> bellmanFord(Graph& graph, string start);
-
+bool checkDay(string day){
+    bool valid = true;
+    for (int i = 0; i < day.length(); i++)
+    {
+        //33 - 64 is special charaters 
+        //91-96
+        //48-57 digits
+        //123-126
+        if (isdigit(day[i]))
+        {// && day[i] <= 47 || day[i] >= 58 && day[i] <= 64 || day[i] >=91 && day[i]<=96 || day[i] >= 123) {//all invalid inputs
+            valid = true;
+            //break;
+        }
+        else {
+            valid = false;
+            break;
+        }
+    }
+    int date = 0;
+    if (valid)
+    {
+        date = stoi(day);
+        if (date < 1 || date > 31)
+        {
+            day = "";
+            valid = false;
+        }
+    }
+    //format dates into 1/1/2021 style
+    /*string jan = "1/";
+    string year = "/2021";
+    if (valid) {
+        //graph = flights[date];
+        day = jan + day + year;
+    }*/
+    return valid;
+}
+bool checkLocation(Graph& graph, string stend) {
+    bool valid = true;
+    auto it = graph.graph.find(stend);
+    if (it == graph.graph.end()) {
+        //not found 
+        valid = false;
+    }
+    return valid;
+}
 int main() {
 //<<<<<<< Updated upstream
 
@@ -141,125 +186,40 @@ int main() {
         bool valid = false;
         cout<<"What day of the month would you like to travel (pick a number from 1-31)?"<<endl;
         getline(cin,day);
-        
-        //make sure it is a number and between 1-31
-        while(!valid)
-        {
-            for(int i = 0 ; i < day.length(); i++)
-            {
-            //33 - 64 is special charaters 
-            //91-96
-            //48-57 digits
-            //123-126
-                if(isdigit(day[i]))
-                {// && day[i] <= 47 || day[i] >= 58 && day[i] <= 64 || day[i] >=91 && day[i]<=96 || day[i] >= 123) {//all invalid inputs
-                    valid = true;
-                    //break;
-                }
-                else{
-                    valid = false;
-                    break;
-                }
-
-            }
-        int date = 0;
-        if(valid)
-        {
-            date = stoi(day);
-            if(date < 1 || date > 31)
-            {
-                day = "";
-                valid = false;
-            }
-        }
-        
-        //format dates into 1/1/2021 style
-       /* string jan = "1/";
-        string year = "/2021";
-        */
-
-       /*  if(valid){
-            graph = flights[date];
-            day = jan + day + year;
-        }
-        */
-        if(!valid)
-        {
+        bool isValid = checkDay(day);
+        while (!isValid) {
             cout << "Invalid input. Please enter a number from 1-31" << endl;
-            getline(cin,day);
+            getline(cin, day);
+            isValid = checkDay(day);
+        }
+        int date = stoi(day);
 
+        cout << "What is your starting location? (e.g. Los Angeles CA)" << endl;
+        getline(cin, start);
+        isValid = checkLocation(flights[date], start);
+        while (!isValid) {
+            cout << "Starting location not found. Please try another location." << endl;
+            getline(cin, start);
+            isValid = checkLocation(flights[date], start);
         }
-        }
-        
 
-        cout<<"What is your starting location? (e.g. Los Angeles CA)"<<endl;
-        getline(cin,start);
-        for(int j = 0 ; j < start.length(); j++){
-            //33 - 64 is special charaters and digits 
-            //91-96
-            //123-126
-            if(start[j] >= 33 && start[j] <= 64 || start[j] >=91 && start[j]<=96 || start[j] >= 123) {//all invalid inputs
-                start = "";
-                break;
-            }
-        }
-        //if(graph.graph.find())
-       /* auto iter = graph.graph.begin();
-        for(; iter != graph.graph.end(); ++iter){
-            if(start != iter->first){
-                valid = false;
-            }
-        }
-        */
-        //make sure the city, state exists by going throuhg the csv file and making sure the city/state is present in it 
-        //make sure it is not a number or some shit but I think that can be done with 
-        cout<<"What is your destination? (e.g. Los Angeles CA)"<<endl;
+        cout << "What is your destination? (e.g. Los Angeles CA)" << endl;
         getline(cin, des);
-        for(int k = 0 ; k < des.length(); k++){
-            //33 - 64 is special charaters 
-            //91-96
-            //123-126
-            if(des[k] >= 33 && des[k] <= 64 || des[k] >=91 && des[k]<=96 || des[k] >= 123) {//all invalid inputs
-                des = "";
-                break;
-            }
+        isValid = checkLocation(flights[date], des);
+        while (!isValid) {
+            cout << "Destination not found. Please try another location." << endl;
+            getline(cin, des);
+            isValid = checkLocation(flights[date], des);
         }
-      /*  auto iter2 = graph.graph.begin();
-        for(; iter2 != graph.graph.end(); ++iter2){
-            if(des != iter2->first){
-                valid = false;
-            }
-        }
-        */
-        //same thing for the destination check against the csv file
-        /*if(!graph.isEdge(start, des)){
-            valid = false;
-        }*/
-        // if valid, call find the best flights functions
-//<<<<<<< Updated upstream
 
-        // ....... Testing code for dijkstra, delete later ........
-        // dijkstra(flights[0], "Los Angeles CA", "Detroit MI");
-        // ..........Testing code for dijkstra ........
-
-//=======
-        //call two functions
-        //which date is being used and then pass in graphs into two functions and takes in graph and starting positon
-        //print out the best flights based on the vector given regular for loop reading
-        
-       /* if(valid){
-            dijkstra(graph, start, des);
+        if (isValid) {
+            dijkstra(flights[date], start, des);
             //bellmanFord(graph, start);
             //graph.printGraph();
         }
-        else{
-            cout<< "Invalid input. Try again.";
+        else {
+            cout << "Invalid input. Try again.";
         }
-
-
-        */
-//>>>>>>> Stashed changes
-
         // Ask users if they want to continue with the program
         cout<<"Would you like to continue (Yes/No)?"<<endl;
         cin>>command;
