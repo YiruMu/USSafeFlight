@@ -198,7 +198,7 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
             path += " -> ";
         stk.pop();
     }
-    cout << path;
+    cout << path << endl;
     return path;
 }
 
