@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <set>
 #include <stack>
 #include <limits.h>
 using namespace std;
@@ -118,7 +119,89 @@ void dijkstra(Graph& graph, string start, string end)
     cout<<"Arrived!"<<endl;
     
 }
-//vector<string> bellmanFord(Graph& graph, string start);
+string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string dest)
+{
+    // check if src/dest is a valid input in main()
+
+    // Note: Why distMap and strVec? A vector is used to allow me to iterate 
+    // through src first, before other vertices. The map allows faster accesses.
+    
+    // initialize distance map and get number of edges
+    map<string,pair<int,string>> distMap; // value, (distance, parent)
+    vector<string> strVec; 
+    distMap[src] = pair<int,string>(0,""); // val=src,d=0,p=""
+    strVec.push_back(src);
+    for (auto iter = g.begin(); iter != g.end(); ++iter)
+    {
+        if (distMap.count(iter->first) == 0) // if value does not already exist in distMap, insert it
+        {
+            distMap[iter->first] = pair<int,string>(INT_MAX,"");
+            strVec.push_back(iter->first); // val, d = 'infinity', p = null
+        }
+    }
+
+    int distU = 0;
+    int distV = 0;
+    int edgeWeight = 0;
+    string strVal = "";
+    set<string> found;
+    found.insert(src);
+    for (int i = 0; i < g.size()-1; i++) // |V|-1 iterations
+    {
+        // iterate through every vertex in distMap
+        for (int j = 0; j < strVec.size(); j++)
+        {
+            strVal = strVec.at(j);
+            if (found.count(strVal) > 0) // if vertex has been found
+            {
+                // iterate through edges: relax edges
+                for (int k = 0; k < g[strVal].size(); ++k)
+                {
+                    if (found.count(g[strVal].at(k).first) == 0); // if vertex was not found, mark found
+                        found.insert(g[strVal].at(k).first);
+                    // Pseudocode for relaxing edges (from discussion slides):
+                    // if distance[u] + w < distance[v] then
+                    //   distance[v] = distance[u] + w
+                    //   predecessor[v] = u
+                    distU = distMap[strVal].first;
+                    edgeWeight = g[strVal].at(k).second;
+                    distV = distMap[g[strVal].at(k).first].first;
+                    if (distU + edgeWeight < distV)
+                    {
+                        int newDistV = distU + edgeWeight;
+                        string newPre = strVal;
+                        distMap[g[strVal].at(k).first].first = distU + edgeWeight; // distV = ...
+                        distMap[g[strVal].at(k).first].second = strVal; // predecessorV = ...
+                    }
+                }
+            }
+        }
+    }
+    // not necessary to check for negative-weight values, since all of
+    // our data uses positive values for distance
+
+    // return shortest path from src->dest
+    bool foundSrc = false;
+    string path = "";
+    stack<string> stk;
+    stk.push(dest);
+    while (!foundSrc)
+    {
+        stk.push(distMap[stk.top()].second); // push parent on stack
+        if (stk.top() == src)
+            foundSrc = true;
+    }
+    while(!stk.empty())
+    {
+        path += stk.top();
+        if (stk.size() > 1)
+            path += " -> ";
+        stk.pop();
+    }
+    cout << path;
+    return path;
+}
+
 bool checkDay(string day){
     bool valid = true;
     for (int i = 0; i < day.length(); i++)
