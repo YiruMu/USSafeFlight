@@ -257,7 +257,7 @@ int main() {
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
     cout<<"Loading Data ..."<<endl;
-    LoadData(flights,"Data.csv");
+    LoadData(flights,"DataPoints.csv");
 
     string command = "Yes";
     string day ="";
