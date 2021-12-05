@@ -297,7 +297,7 @@ int main() {
 
         if (isValid) {
             dijkstra(flights[date], start, des);
-            //bellmanFord(graph, start);
+            string temp = bellmanFord(flights[date].graph, start, des);
             //graph.printGraph();
         }
         else {
