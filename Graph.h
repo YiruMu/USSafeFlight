@@ -72,7 +72,7 @@ vector<string> Graph::getAdjacent(string vertex)
 
 
         // sort the vector; might not needed for strings
-        for (int i =1;i<adjacent.size(); i++)
+      /*  for (int i =1;i<adjacent.size(); i++)
         {
             string key = adjacent.at(i);
             int j = i-1;
@@ -83,6 +83,7 @@ vector<string> Graph::getAdjacent(string vertex)
             }
             adjacent.at(j+1) = key;
         }
+        */
     }
     return adjacent;
 }

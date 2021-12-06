@@ -8,6 +8,7 @@
 #include <set>
 #include <stack>
 #include <limits.h>
+#include <queue>
 using namespace std;
 
 // Load data function and find the best paths functions here
@@ -38,7 +39,7 @@ void LoadData(vector<Graph>& flights, string path)
 
         getline(s,distance);
 
-        for (int i =0; i<30; i++)
+        for (int i =0; i<31; i++)
         {    string d = to_string(i+1);
             if (day == "1/"+d+"/2021")
             {
@@ -50,6 +51,8 @@ void LoadData(vector<Graph>& flights, string path)
         end ="";
 
     }
+
+
 
 }
 
@@ -199,10 +202,10 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
             path += " -> ";
         stk.pop();
     }
-    cout << path << endl;
+    cout << path << "->Arrived!"<<endl;
     return path;
 }
-
+// Functions for checking
 bool checkDay(string day){
     bool valid = true;
     for (int i = 0; i < day.length(); i++)
@@ -249,6 +252,30 @@ bool checkLocation(Graph& graph, string stend) {
     }
     return valid;
 }
+bool bfsReachable(Graph& graph, string src, string dest)
+{
+    set<string> visited;
+    queue<string> s;
+    visited.insert(src);
+    s.push(src);
+    while(!s.empty())
+    {
+        string u = s.front();
+        s.pop();
+        for (auto v: graph.getAdjacent(u))
+        {
+            if(v==dest)
+                return true;
+            if(visited.find(v)==visited.end())
+            {
+                visited.insert(v);
+                s.push(v);
+            }
+        }
+    }
+    return false;
+}
+
 int main() {
 //<<<<<<< Updated upstream
 
@@ -276,7 +303,7 @@ int main() {
             getline(cin, day);
             isValid = checkDay(day);
         }
-        int date = stoi(day);
+        int date = stoi(day)-1;
 
         cout << "What is your starting location? (e.g. Los Angeles CA)" << endl;
         getline(cin, start);
@@ -296,21 +323,27 @@ int main() {
             isValid = checkLocation(flights[date], des);
         }
 
-        if (isValid) {
+        bool reachable = bfsReachable(flights[date], start,des);
+        if(!reachable)
+        {
+            cout<<"Sorry, the destination is not reachable."<<endl;
+        }
+
+        if (isValid && reachable) {
+            cout<<"Flights recommendation according to Dijkstra Algorithm: "<<endl;
             dijkstra(flights[date], start, des);
+            cout<<"Flights recommendation according to Bellman-Ford Algorithm: "<<endl;
             string temp = bellmanFord(flights[date].graph, start, des);
-            //graph.printGraph();
+
         }
-        else {
-            cout << "Invalid input. Try again.";
-        }
+
         // Ask users if they want to continue with the program
         cout<<"Would you like to continue (Yes/No)?"<<endl;
-        cin>>command;
+        getline(cin,command);
         while (command != "Yes" && command != "No")
         {
             cout<<"Invalid input. Try again."<<endl;
-            cin>>command;
+            getline(cin,command);
         }
 
     }
