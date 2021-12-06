@@ -59,6 +59,11 @@ void LoadData(vector<Graph>& flights, string path)
 //the function returns a map<string,int> that contains the shortest path from the source vertex to all vertices in the directed graph.
 void dijkstra(Graph& graph, string start, string end)
 {
+    if (start == end)
+    {
+        cout << start + " -> Arrived!" << endl;
+        return;
+    }
     map<string,int> output;
     map<string,bool> set;
     map<string,string> p;
