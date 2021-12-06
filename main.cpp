@@ -117,7 +117,7 @@ void dijkstra(Graph& graph, string start, string end)
 
     while (!results.empty())
     {
-        cout<<results.top()<<" ->";
+        cout<<results.top()<<" -> ";
         results.pop();
     }
     cout<<"Arrived!"<<endl;
@@ -126,7 +126,11 @@ void dijkstra(Graph& graph, string start, string end)
 string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string dest)
 {
     // check if src/dest is a valid input in main()
-
+    if (src == dest)
+    {
+        cout << src + " -> Arrived!" << endl;
+        return src + " -> Arrived!";
+    }
     // Note: Why distMap and strVec? A vector is used to allow me to iterate 
     // through src first, before other vertices. The map allows faster accesses.
     
@@ -137,10 +141,11 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
     strVec.push_back(src);
     for (auto iter = g.begin(); iter != g.end(); ++iter)
     {
-        if (distMap.count(iter->first) == 0) // if value does not already exist in distMap, insert it
+        // if value does not already exist in distMap, insert it
+        if (distMap.count(iter->first) == 0) 
         {
-            distMap[iter->first] = pair<int,string>(INT_MAX,"");
-            strVec.push_back(iter->first); // val, d = 'infinity', p = null
+            distMap[iter->first] = pair<int,string>(INT_MAX,""); // val, d = 'infinity', p = null
+            strVec.push_back(iter->first); 
         }
     }
 
@@ -156,17 +161,14 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
         for (int j = 0; j < strVec.size(); j++)
         {
             strVal = strVec.at(j);
-            if (found.count(strVal) > 0) // if vertex has been found
+            if (found.count(strVal) > 0)
             {
                 // iterate through edges: relax edges
                 for (int k = 0; k < g[strVal].size(); ++k)
                 {
                     if (found.count(g[strVal].at(k).first) == 0); // if vertex was not found, mark found
                         found.insert(g[strVal].at(k).first);
-                    // Pseudocode for relaxing edges (from discussion slides):
-                    // if distance[u] + w < distance[v] then
-                    //   distance[v] = distance[u] + w
-                    //   predecessor[v] = u
+                    // Used pseudocode for relaxing edges (from discussion slides)
                     distU = distMap[strVal].first;
                     edgeWeight = g[strVal].at(k).second;
                     distV = distMap[g[strVal].at(k).first].first;
@@ -202,7 +204,7 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
             path += " -> ";
         stk.pop();
     }
-    cout << path << "->Arrived!"<<endl;
+    cout << path << " -> Arrived!"<<endl;
     return path;
 }
 // Functions for checking
