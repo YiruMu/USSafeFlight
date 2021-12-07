@@ -314,8 +314,10 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
     string strVal = "";
     set<string> found;
     found.insert(src);
+    bool changeMade = false;
     for (int i = 0; i < g.size()-1; i++) // |V|-1 iterations
     {
+        changeMade = false;
         // iterate through every vertex in distMap
         for (int j = 0; j < strVec.size(); j++)
         {
@@ -333,14 +335,17 @@ string bellmanFord(map<string, vector<pair<string,int>>>& g, string src, string 
                     distV = distMap[g[strVal].at(k).first].first;
                     if (distU + edgeWeight < distV)
                     {
-                        int newDistV = distU + edgeWeight;
-                        string newPre = strVal;
+                        //int newDistV = distU + edgeWeight;
+                        //string newPre = strVal;
                         distMap[g[strVal].at(k).first].first = distU + edgeWeight; // distV = ...
                         distMap[g[strVal].at(k).first].second = strVal; // predecessorV = ...
+                        changeMade = true;
                     }
                 }
             }
         }
+        if (!changeMade)
+            break;
     }
     // not necessary to check for negative-weight values, since all of
     // our data uses positive values for distance
@@ -477,4 +482,20 @@ void Testing(vector<Graph>& flights)
     cout <<"Time: "<< d.count() <<" seconds"<< endl;
 
 
+}
+void specificTesting(Graph& g, string start, string end)
+{
+    cout<<"Specific Speed Testing for Dijkstra Algorithm: "<<endl;
+    auto begin = high_resolution_clock::now();
+    dijkstra(g, start, end);
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<seconds>(stop - begin);
+    cout <<"Time: "<< duration.count() <<" seconds"<<endl;
+
+    cout<<"Specific Speed Testing for Bellman-Ford Algorithm: "<<endl;
+    auto b = high_resolution_clock::now();
+    string temp = bellmanFord(g.graph, start, end);
+    auto s = high_resolution_clock::now();
+    auto d = duration_cast<seconds>(s - b);
+    cout <<"Time: "<< d.count() <<" seconds"<< endl;
 }

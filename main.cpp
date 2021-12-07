@@ -15,10 +15,18 @@ int main() {
     cout<<"Loading Data ..."<<endl;
     LoadData(flights,"Data.csv");
 
-    // Speed Testing (uncomment the section when testing is needed; comment out the section when testing is not needed)
-    /* Testing(flights);
+    // Random Speed Testing (uncomment the section when testing is needed; comment out the section when testing is not needed)
+    /*int iterations = 1;
+    for (int i = 0; i < iterations; i++)
+    {
+        Testing(flights);
+    }
+    return 0;*/
+
+    // Specific Speed Testing
+    //"Great Falls MT", "Pierre SD"
+    specificTesting(flights[1], "King Salmon AK", "Manchester NH");
     return 0;
-     */
 
     string command = "Yes";
     string day ="";
@@ -73,7 +81,11 @@ int main() {
         // Ask users if they want to continue with the program
         cout<<"Would you like to continue (Yes/No)?"<<endl;
         getline(cin,command);
-        while (command != "Yes" && command != "No")
+        for (int i = 0; i < command.length(); i++)
+        {
+            command.at(i) = tolower(command.at(i));
+        }
+        while (command != "yes" && command != "no")
         {
             cout<<"Invalid input. Try again."<<endl;
             getline(cin,command);
