@@ -12,7 +12,7 @@ int main() {
     // create a vector that contains 31 graphs/travel information of 31 days of the month
     vector<Graph> flights (31, Graph());
     cout<<"Welcome to US Safe Flight! We are here to help you find the best flight(s)"<<endl;
-    cout<<"Loading Data ..."<<endl;
+    cout<<"Loading Data ..."<<endl<<endl;
     LoadData(flights,"Data.csv");
 
     // Store new random data in CSV file
@@ -83,7 +83,7 @@ int main() {
         }
 
         // Ask users if they want to continue with the program
-        cout<<"Would you like to continue (Yes/No)?"<<endl;
+        cout<<"\nWould you like to continue (Yes/No)?"<<endl;
         getline(cin,command);
         for (int i = 0; i < command.length(); i++)
         {
@@ -96,7 +96,7 @@ int main() {
         }
 
     }
-    cout << "Would you like to randomly test the execution time of the algorithms (Yes/No)?"<<endl;
+    cout << "\nWould you like to randomly test the execution time of the algorithms (Yes/No)?"<<endl;
     getline(cin,command);
     for (int i = 0; i < command.length(); i++)
     {
@@ -110,7 +110,7 @@ int main() {
     if (command == "yes")
         StoreData(flights);
 
-    cout << "Would you like to test the execution time with specific start and end destinations (Yes/No)?<"<<endl;
+    cout << "\nWould you like to test the execution time with specific start and end destinations (Yes/No)?"<<endl;
     getline(cin,command);
     for (int i = 0; i < command.length(); i++)
     {
