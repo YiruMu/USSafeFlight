@@ -211,7 +211,7 @@ void LoadData(vector<Graph>& flights, string path)
 
 }
 
-//the Function prints out the shortest path starting from location A and ends at loation B
+//the Function prints out the shortest path starting from location A and ends at location B
 void dijkstra(Graph& graph, string start, string end)
 {
     if (start == end)
@@ -472,7 +472,7 @@ string Testing(vector<Graph>& flights)
     dijkstra(flights[day], start, end);
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(stop - begin);
-    cout <<"Time: "<< duration.count() <<" milliseconds"<<endl;
+    cout <<"Time: "<< duration.count() <<" ms"<<endl;
     string time1 = to_string(duration.count());
 
     cout<<"Speed Testing for Bellman-Ford Algorithm: "<<endl;
@@ -480,7 +480,7 @@ string Testing(vector<Graph>& flights)
     string temp = bellmanFord(flights[day].graph, start, end);
     auto s = high_resolution_clock::now();
     auto d = duration_cast<milliseconds>(s - b);
-    cout <<"Time: "<< d.count() <<" milliseconds"<< endl;
+    cout <<"Time: "<< d.count() <<" ms"<< endl;
     string time2 = to_string(d.count());
 
     return time1 + "," + time2 + "\n";
@@ -491,15 +491,15 @@ void specificTesting(Graph& g, string start, string end)
     auto begin = high_resolution_clock::now();
     dijkstra(g, start, end);
     auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(stop - begin);
-    cout <<"Time: "<< duration.count() <<" seconds"<<endl;
+    auto duration = duration_cast<milliseconds>(stop - begin);
+    cout <<"Time: "<< duration.count() <<" ms"<<endl;
 
     cout<<"Specific Speed Testing for Bellman-Ford Algorithm: "<<endl;
     auto b = high_resolution_clock::now();
     string temp = bellmanFord(g.graph, start, end);
     auto s = high_resolution_clock::now();
-    auto d = duration_cast<seconds>(s - b);
-    cout <<"Time: "<< d.count() <<" seconds"<< endl;
+    auto d = duration_cast<milliseconds>(s - b);
+    cout <<"Time: "<< d.count() <<" ms"<< endl;
 }
 
 // Stores random flight data to a CSV to compare Bellman and Dijkstra
