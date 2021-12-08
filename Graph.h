@@ -211,7 +211,7 @@ void LoadData(vector<Graph>& flights, string path)
 
 }
 
-//the Function prints out the shortest path starting from location A and ends at loation B
+//the Function prints out the shortest path starting from location A and ends at location B
 void dijkstra(Graph& graph, string start, string end)
 {
     if (start == end)
