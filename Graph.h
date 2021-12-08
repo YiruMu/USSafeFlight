@@ -471,15 +471,15 @@ void Testing(vector<Graph>& flights)
     auto begin = high_resolution_clock::now();
     dijkstra(flights[day], start, end);
     auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(stop - begin);
-    cout <<"Time: "<< duration.count() <<" seconds"<<endl;
+    auto duration = duration_cast<milliseconds>(stop - begin);
+    cout <<"Time: "<< duration.count() <<" ms"<<endl;
 
     cout<<"Speed Testing for Bellman-Ford Algorithm: "<<endl;
     auto b = high_resolution_clock::now();
     string temp = bellmanFord(flights[day].graph, start, end);
     auto s = high_resolution_clock::now();
-    auto d = duration_cast<seconds>(s - b);
-    cout <<"Time: "<< d.count() <<" seconds"<< endl;
+    auto d = duration_cast<milliseconds>(s - b);
+    cout <<"Time: "<< d.count() <<" ms"<< endl;
 
 
 }
@@ -489,13 +489,13 @@ void specificTesting(Graph& g, string start, string end)
     auto begin = high_resolution_clock::now();
     dijkstra(g, start, end);
     auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(stop - begin);
-    cout <<"Time: "<< duration.count() <<" seconds"<<endl;
+    auto duration = duration_cast<milliseconds>(stop - begin);
+    cout <<"Time: "<< duration.count() <<" ms"<<endl;
 
     cout<<"Specific Speed Testing for Bellman-Ford Algorithm: "<<endl;
     auto b = high_resolution_clock::now();
     string temp = bellmanFord(g.graph, start, end);
     auto s = high_resolution_clock::now();
-    auto d = duration_cast<seconds>(s - b);
-    cout <<"Time: "<< d.count() <<" seconds"<< endl;
+    auto d = duration_cast<milliseconds>(s - b);
+    cout <<"Time: "<< d.count() <<" ms"<< endl;
 }

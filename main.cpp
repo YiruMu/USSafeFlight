@@ -16,16 +16,17 @@ int main() {
     LoadData(flights,"Data.csv");
 
     // Random Speed Testing (uncomment the section when testing is needed; comment out the section when testing is not needed)
-    int iterations = 1;
+   /* int iterations = 1;
     for (int i = 0; i < iterations; i++)
     {
         Testing(flights);
     }
     return 0;
+    */
 
     // Specific Speed Testing
     //"Great Falls MT", "Pierre SD"
-   // specificTesting(flights[1], "King Salmon AK", "Manchester NH");
+   //specificTesting(flights[1], "King Salmon AK", "Manchester NH");
     //return 0;
 
     string command = "Yes";
