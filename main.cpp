@@ -16,10 +16,10 @@ int main() {
     LoadData(flights,"Data.csv");
 
     // Store new random data in CSV file
-    //StoreData(flights);
-    //return 0;
+    /*StoreData(flights);
+    return 0;*/
     // Random Speed Testing (uncomment the section when testing is needed; comment out the section when testing is not needed)
-   /* int iterations = 1;
+    /*int iterations = 1;
     for (int i = 0; i < iterations; i++)
     {
         Testing(flights);
