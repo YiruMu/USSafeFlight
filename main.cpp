@@ -79,7 +79,7 @@ int main() {
         }
 
     }
-    cout << "\nWould you like to randomly test the execution time of the algorithms (Yes/No)?"<<endl;
+    /*cout << "\nWould you like to randomly test the execution time of the algorithms (Yes/No)?"<<endl;
     getline(cin,command);
     for (int i = 0; i < command.length(); i++)
     {
@@ -130,6 +130,6 @@ int main() {
             cout<<"Sorry, the destination is not reachable."<<endl;
         }
         specificTesting(flights[1],start,des);
-    }
+    }*/
     return 0;
 }
