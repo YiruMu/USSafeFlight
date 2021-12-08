@@ -1,5 +1,5 @@
 #include <string>
-#include<vector>
+#include <vector>
 #include <fstream>
 #include <sstream>
 #include <map>
@@ -440,7 +440,7 @@ bool bfsReachable(Graph& graph, string src, string dest)
 }
 
 // For Testing
-void Testing(vector<Graph>& flights)
+string Testing(vector<Graph>& flights)
 {
     srand(time(0));
     int day = rand() % 31;
@@ -471,17 +471,19 @@ void Testing(vector<Graph>& flights)
     auto begin = high_resolution_clock::now();
     dijkstra(flights[day], start, end);
     auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(stop - begin);
-    cout <<"Time: "<< duration.count() <<" seconds"<<endl;
+    auto duration = duration_cast<milliseconds>(stop - begin);
+    cout <<"Time: "<< duration.count() <<" milliseconds"<<endl;
+    string time1 = to_string(duration.count());
 
     cout<<"Speed Testing for Bellman-Ford Algorithm: "<<endl;
     auto b = high_resolution_clock::now();
     string temp = bellmanFord(flights[day].graph, start, end);
     auto s = high_resolution_clock::now();
-    auto d = duration_cast<seconds>(s - b);
-    cout <<"Time: "<< d.count() <<" seconds"<< endl;
+    auto d = duration_cast<milliseconds>(s - b);
+    cout <<"Time: "<< d.count() <<" milliseconds"<< endl;
+    string time2 = to_string(d.count());
 
-
+    return time1 + "," + time2 + "\n";
 }
 void specificTesting(Graph& g, string start, string end)
 {
@@ -498,4 +500,19 @@ void specificTesting(Graph& g, string start, string end)
     auto s = high_resolution_clock::now();
     auto d = duration_cast<seconds>(s - b);
     cout <<"Time: "<< d.count() <<" seconds"<< endl;
+}
+
+// Stores random flight data to a CSV to compare Bellman and Dijkstra
+void StoreData(vector<Graph>& flights)
+{
+    ofstream myFile("OutputData.csv");
+    
+    myFile << "Dijkstra(ms),Bellman-Ford(ms)\n";
+    for (int i = 0; i < 100; i++)
+    {
+        myFile << Testing(flights);
+    }
+    
+    // Close the file
+    myFile.close();
 }
