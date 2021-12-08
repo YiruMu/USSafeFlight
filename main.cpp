@@ -32,12 +32,12 @@ int main() {
     /*specificTesting(flights[1], "King Salmon AK", "Manchester NH");
     return 0;*/
 
-    string command = "Yes";
+    string command = "yes";
     string day ="";
     string start = "";
     string des = "";
 
-    while(command=="Yes")
+    while(command=="yes")
     {
         bool valid = false;
         cout<<"What day of the month would you like to travel (pick a number from 1-31)?"<<endl;
@@ -96,6 +96,57 @@ int main() {
         }
 
     }
+    cout << "Would you like to randomly test the execution time of the algorithms (Yes/No)?"<<endl;
+    getline(cin,command);
+    for (int i = 0; i < command.length(); i++)
+    {
+        command.at(i) = tolower(command.at(i));
+    }
+    while (command != "yes" && command != "no")
+    {
+        cout<<"Invalid input. Try again."<<endl;
+        getline(cin,command);
+    }
+    if (command == "yes")
+        StoreData(flights);
 
+    cout << "Would you like to test the execution time with specific start and end destinations (Yes/No)?<"<<endl;
+    getline(cin,command);
+    for (int i = 0; i < command.length(); i++)
+    {
+        command.at(i) = tolower(command.at(i));
+    }
+    while (command != "yes" && command != "no")
+    {
+        cout<<"Invalid input. Try again."<<endl;
+        getline(cin,command);
+    }
+    if (command == "yes")
+    {
+        cout << "What is your starting location? (e.g. Los Angeles CA)" << endl;
+        getline(cin, start);
+        bool isValid = checkLocation(flights[1], start);
+        while (!isValid) {
+            cout << "Starting location not found. Please try another location." << endl;
+            getline(cin, start);
+            isValid = checkLocation(flights[1], start);
+        }
+
+        cout << "What is your destination? (e.g. Los Angeles CA)" << endl;
+        getline(cin, des);
+        isValid = checkLocation(flights[1], des);
+        while (!isValid) {
+            cout << "Destination not found. Please try another location." << endl;
+            getline(cin, des);
+            isValid = checkLocation(flights[1], des);
+        }
+
+        bool reachable = bfsReachable(flights[1], start,des);
+        if(!reachable)
+        {
+            cout<<"Sorry, the destination is not reachable."<<endl;
+        }
+        specificTesting(flights[1],start,des);
+    }
     return 0;
 }

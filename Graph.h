@@ -505,10 +505,10 @@ void specificTesting(Graph& g, string start, string end)
 // Stores random flight data to a CSV to compare Bellman and Dijkstra
 void StoreData(vector<Graph>& flights)
 {
-    ofstream myFile("OutputData.csv");
+    ofstream myFile("testOutput.csv");
     
     myFile << "Dijkstra(ms),Bellman-Ford(ms)\n";
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 5; i++)
     {
         myFile << Testing(flights);
     }
